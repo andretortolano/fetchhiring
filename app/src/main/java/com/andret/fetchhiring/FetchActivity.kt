@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.andret.fetchhiring.features.HomeScreen
+import com.andret.fetchhiring.features.home.HomeScreen
 import com.andret.fetchhiring.ui.theme.FetchHiringTheme
 
 class FetchActivity : ComponentActivity() {

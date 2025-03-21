@@ -7,7 +7,7 @@ import com.andret.fetchhiring.data.remote.RetrofitItemSource
 import com.andret.fetchhiring.data.wrapper.S3RetrofitWrapper
 import com.andret.fetchhiring.domain.GetSortedItemsListUseCase
 import com.andret.fetchhiring.domain.ItemProvider
-import com.andret.fetchhiring.features.HomeViewModel
+import com.andret.fetchhiring.features.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
