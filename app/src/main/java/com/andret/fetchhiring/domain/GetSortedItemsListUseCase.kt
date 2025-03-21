@@ -1,6 +1,6 @@
 package com.andret.fetchhiring.domain
 
-class GetItemsListUseCase(private val itemProvider: ItemProvider) {
+class GetSortedItemsListUseCase(private val itemProvider: ItemProvider) {
 
     suspend fun invoke(): List<ItemList> {
         return itemProvider.getItems()
