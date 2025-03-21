@@ -11,44 +11,26 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.andret.fetchhiring.data.ItemRepository
-import com.andret.fetchhiring.data.remote.RetrofitItemService
-import com.andret.fetchhiring.data.remote.RetrofitItemSource
-import com.andret.fetchhiring.data.wrapper.S3RetrofitWrapper
-import com.andret.fetchhiring.domain.GetSortedItemsListUseCase
 import com.andret.fetchhiring.domain.ItemEntity
 import com.andret.fetchhiring.domain.ItemListEntity
 import com.andret.fetchhiring.ui.ds.FetchCard
 import com.andret.fetchhiring.ui.theme.FetchHiringTheme
+import org.koin.androidx.compose.koinViewModel
 
-private fun getViewModelFactory(): HomeViewModelFactory {
-    return HomeViewModelFactory(
-        GetSortedItemsListUseCase(
-            ItemRepository(
-                RetrofitItemSource(
-                    S3RetrofitWrapper.retrofit.create(RetrofitItemService::class.java)
-                )
-            )
-        )
-    )
-}
-
+// stateful composable
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
-    val factory = remember { getViewModelFactory() }
-    val viewModel: HomeViewModel = viewModel(factory = factory)
+    val viewModel: HomeViewModel = koinViewModel()
 
     val state by viewModel.state.collectAsState()
-
     HomeScreen(modifier, state)
 }
 
+// stateless composable
 @Composable
 fun HomeScreen(modifier: Modifier, state: List<ItemListEntity>) {
     LazyColumn(

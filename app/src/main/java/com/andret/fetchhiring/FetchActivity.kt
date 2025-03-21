@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import com.andret.fetchhiring.features.HomeScreen
 import com.andret.fetchhiring.ui.theme.FetchHiringTheme
 
-class MainActivity : ComponentActivity() {
+class FetchActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
