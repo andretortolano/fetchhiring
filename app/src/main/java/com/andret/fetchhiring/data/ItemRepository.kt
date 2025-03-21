@@ -1,16 +1,22 @@
 package com.andret.fetchhiring.data
 
-import com.andret.fetchhiring.domain.Item
+import com.andret.fetchhiring.domain.ItemEntity
 import com.andret.fetchhiring.domain.ItemProvider
 
-class ItemRepository: ItemProvider {
+class ItemRepository(
+    private val itemRemoteSource: ItemRemoteSource
+) : ItemProvider {
 
-    override suspend fun getItems(): List<Item> {
-        return listOf(
-            Item(1, 1, "Item 1"),
-            Item(2, 1, "Item 2"),
-            Item(3, 2, "Item 3"),
-            Item(4, 2, "Item 4"),
-        )
+    override suspend fun getItems(): List<ItemEntity> {
+        // right now this does not do much but in the future we might want to cache
+        // response and prefetch while getting new list from the web or have support
+        // for offline mode.
+        // TODO: handle possible exception from remote source
+        return itemRemoteSource.getItems()
+            .toItems()
+    }
+
+    private fun List<ItemDTO>.toItems(): List<ItemEntity> {
+        return map { ItemEntity(it.id, it.listId, requireNotNull(it.name)) }
     }
 }
